@@ -27,7 +27,6 @@ def load_data(symbol, start, end):
 def convert_df_to_csv(df):
     return df.to_csv().encode("utf-8")
 
-
 ## UI Functions
 
 # inputs for downloading data
@@ -113,6 +112,15 @@ Average, Bollinger Bands, Relative Strength Index
 """)
 
 df = load_data(ticker, start_date, end_date)
+
+# Check and rename columns if needed
+df.rename(columns={
+    'Adj Close': 'close',  # if 'Adj Close' is the close column
+    'Open': 'open',
+    'High': 'high',
+    'Low': 'low',
+    'Volume': 'volume'
+}, inplace=True)
 
 # data preview
 data_exp = st.expander("Preview data")
